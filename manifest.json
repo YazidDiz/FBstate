@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "ZetCHIMERA Fb-State",
+  "name": "ZetBot-Cookies",
   "version": "1.0.0",
-  "description": "Extract Facebook cookies and FBState in a stylish dark/blue popup.",
+  "description": "Exportez vos Cookies Facebook en un seul Clic !",
   "permissions": [
     "cookies",
     "storage",
