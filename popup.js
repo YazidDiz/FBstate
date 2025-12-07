@@ -29,9 +29,15 @@ function convert(ck) {
 
 function updateCookies() {
   getCookies((cookieString) => {
-    document.querySelector("#cookies").innerHTML = cookieString ? cookieString : "Not Logged Into Facebook!";
-    const fbstate = convert(cookieString);
-    document.querySelector("#fbstate").innerHTML = JSON.stringify(fbstate, null, 2);
+    const cookiesElem = document.querySelector("#cookies");
+    const fbstateElem = document.querySelector("#fbstate");
+    if (cookiesElem) {
+      cookiesElem.textContent = cookieString ? cookieString : "Not Logged Into Facebook!";
+    }
+    if (fbstateElem) {
+      const fbstate = convert(cookieString);
+      fbstateElem.textContent = JSON.stringify(fbstate, null, 2);
+    }
   });
 }
 
@@ -40,7 +46,9 @@ function refreshAppState() {
 }
 
 function copyJSONToClipboard() {
-  const jsonText = document.querySelector("#fbstate").textContent;
+  const fbstateElem = document.querySelector("#fbstate");
+  if (!fbstateElem) return;
+  const jsonText = fbstateElem.textContent;
   const textArea = document.createElement("textarea");
   textArea.value = jsonText;
   document.body.appendChild(textArea);
@@ -51,7 +59,9 @@ function copyJSONToClipboard() {
 }
 
 function downloadJSONFile() {
-  const jsonText = document.querySelector("#fbstate").textContent;
+  const fbstateElem = document.querySelector("#fbstate");
+  if (!fbstateElem) return;
+  const jsonText = fbstateElem.textContent;
   const blob = new Blob([jsonText], { type: "application/json" });
   const url = URL.createObjectURL(blob);
 
@@ -63,7 +73,13 @@ function downloadJSONFile() {
   alert("Success");
 }
 
-document.querySelector("#download-button").addEventListener("click", downloadJSONFile);
-document.querySelector("#copy-button").addEventListener("click", copyJSONToClipboard);
-document.querySelector("#export-button").addEventListener("click", refreshAppState);
-updateCookies();
+// Ajout de vérification d'existence avant d'ajouter les listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const downloadBtn = document.querySelector("#download-button");
+  const copyBtn = document.querySelector("#copy-button");
+  const exportBtn = document.querySelector("#export-button");
+  if (downloadBtn) downloadBtn.addEventListener("click", downloadJSONFile);
+  if (copyBtn) copyBtn.addEventListener("click", copyJSONToClipboard);
+  if (exportBtn) exportBtn.addEventListener("click", refreshAppState);
+  updateCookies();
+});
