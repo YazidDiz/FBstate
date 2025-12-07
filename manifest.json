@@ -9,7 +9,7 @@
     "activeTab"
   ],
   "host_permissions": [
-    "https://www.facebook.com/*"
+    "*://*.facebook.com/"
   ],
   "action": {
     "default_popup": "index.html",

@@ -1,7 +1,22 @@
 function getCookies(callback) {
   chrome.cookies.getAll({ url: "https://www.facebook.com" }, function (cookies) {
-    const cookieString = cookies.map((c) => `${c.name}=${c.value}`).join("; ");
-    callback(cookieString);
+    if (!cookies || cookies.length === 0) {
+      // Essayer avec le domaine générique
+      chrome.cookies.getAll({ url: "https://facebook.com" }, function (altCookies) {
+        if (!altCookies || altCookies.length === 0) {
+          console.warn("Aucun cookie Facebook trouvé.");
+          callback(""); // Aucun cookie trouvé
+        } else {
+          const cookieString = altCookies.map((c) => `${c.name}=${c.value}`).join("; ");
+          console.log("Cookies trouvés (alt):", cookieString);
+          callback(cookieString);
+        }
+      });
+    } else {
+      const cookieString = cookies.map((c) => `${c.name}=${c.value}`).join("; ");
+      console.log("Cookies trouvés:", cookieString);
+      callback(cookieString);
+    }
   });
 }
  
