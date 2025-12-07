@@ -21,23 +21,47 @@ function getCookies(callback) {
 }
  
 function convert(ck) {
-  
-  const now = new Date().getTime();
+  const now = new Date();
+  const nowISO = now.toISOString();
 
-  const cookies = ck
+  // Parse cookies string into array of {key, value}
+  const parsedCookies = ck
     .split("; ")
-    .filter((data) => {
-      const cookieParts = data.split("=");
-      return cookieParts[0];
-    })
-    .map((cookie) => ({
-      key: cookie.split("=")[0],
-      value: cookie.split("=")[1],
+    .filter((data) => data && data.includes("="))
+    .map((cookie) => {
+      const [key, ...rest] = cookie.split("=");
+      return { key, value: rest.join("=") };
+    });
+
+  // Build the array, starting with the /login/device-based/ cookie if c_user exists
+  let cookies = [];
+
+  // If c_user exists, add dbln first (simulate as in your example)
+  const cUser = parsedCookies.find(c => c.key === "c_user");
+  if (cUser) {
+    cookies.push({
+      key: "dbln",
+      value: encodeURIComponent(`{"${cUser.value}":"vp50HcQG"}`), // valeur simulée
+      domain: "facebook.com",
+      path: "/login/device-based/",
+      hostOnly: false,
+      creation: nowISO,
+      lastAccessed: nowISO,
+    });
+  }
+
+  // Add all other cookies
+  parsedCookies.forEach(({ key, value }) => {
+    cookies.push({
+      key,
+      value,
       domain: "facebook.com",
       path: "/",
-      creation: now,
-      lastAccessed: now,
-    }));
+      hostOnly: false,
+      creation: nowISO,
+      lastAccessed: nowISO,
+    });
+  });
 
   return cookies;
 }

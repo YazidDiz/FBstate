@@ -4,31 +4,133 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./assets/style.css" rel="stylesheet">
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .card {
+        background: #182848;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        padding: 2.5rem 2rem 2rem 2rem;
+        max-width: 480px;
+        width: 100%;
+        color: #fff;
+        transition: box-shadow 0.2s;
+      }
+      .card:hover {
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+      }
+      h2 {
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+      }
+      h2 img {
+        width: 48px;
+        height: 48px;
+        margin-right: 12px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        display: block;
+        color: #b3c6e0;
+      }
+      textarea {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 1rem;
+        font-size: 1rem;
+        background: #223a5f;
+        color: #e6f0fa;
+        resize: none;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: background 0.2s;
+      }
+      textarea:focus {
+        outline: none;
+        background: #2d4a73;
+      }
+      .author {
+        font-size: 0.95rem;
+        color: #8fa6c9;
+        margin-top: 0.2rem;
+        display: block;
+      }
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-top: 1.5rem;
+      }
+      button {
+        background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(30,60,114,0.12);
+        transition: background 0.18s, transform 0.12s;
+      }
+      button:hover {
+        background: linear-gradient(90deg, #274585 0%, #3b6cb7 100%);
+        transform: translateY(-2px) scale(1.03);
+      }
+      @media (max-width: 600px) {
+        .card {
+          padding: 1.2rem 0.5rem 1rem 0.5rem;
+        }
+        h2 {
+          font-size: 1.3rem;
+        }
+        .button-group {
+          flex-direction: column;
+          gap: 0.7rem;
+        }
+      }
+    </style>
   </head>
-  <body class="dark-blue">
+  <body>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
-          <div class="card">
-            <h2 style="display: flex; align-items: center">
-              <img src="./assets/icon.png" alt="Kaguya" style="width: 50px; height: 50px; margin-right: 10px" />
-              ZetCHIMERA Fb-State
-            </h2>
-            <div class="form-group">
-              <label for="cookies">Cookies:</label>
-              <textarea id="cookies" rows="5" readonly></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="fbstate">FBState:</label>
-              <textarea id="fbstate" rows="7" readonly></textarea>
-              <span>Author: <a href="https://www.facebook.com/profile.php?id=61576203489525" target="_blank">Zetsu / Yazid</a></span>
-            </div>
-
-            <button id="copy-button">Copy</button>
-            <button id="export-button">Export</button>
-            <button id="download-button">Download</button>
-          </div>
+      <div class="card">
+        <h2>
+          <img src="./assets/icon.png" alt="Kaguya" />
+          ZetCHIMERA Fb-State
+        </h2>
+        <div class="form-group">
+          <label for="fbstate">FBState:</label>
+          <textarea id="fbstate" rows="9" readonly></textarea>
+          <span class="author">Author: <a href="https://www.facebook.com/profile.php?id=61576203489525" target="_blank" style="color:#6cb2ff;text-decoration:underline;">Zetsu / Yazid</a></span>
+        </div>
+        <div class="button-group">
+          <button id="copy-button">Copy</button>
+          <button id="export-button">Export</button>
+          <button id="download-button">Download</button>
         </div>
       </div>
     </div>
