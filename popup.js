@@ -6,23 +6,23 @@ function getCookies(callback) {
 }
  
 function convert(ck) {
-  const validItems = ["sb", "datr", "c_user", "xs"];
-  const now = new Date().getTime();
+  const now = new Date().toISOString();
 
   const cookies = ck
     .split("; ")
-    .filter((data) => {
-      const cookieParts = data.split("=");
-      return validItems.includes(cookieParts[0]);
-    })
-    .map((cookie) => ({
-      key: cookie.split("=")[0],
-      value: cookie.split("=")[1],
-      domain: "facebook.com",
-      path: "/",
-      creation: now,
-      lastAccessed: now,
-    }));
+    .filter((data) => data.includes("="))
+    .map((cookie) => {
+      const [key, ...rest] = cookie.split("=");
+      return {
+        key,
+        value: rest.join("="),
+        domain: "facebook.com",
+        path: "/",
+        hostOnly: false,
+        creation: now,
+        lastAccessed: now,
+      };
+    });
 
   return cookies;
 }

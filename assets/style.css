@@ -1,56 +1,105 @@
 body {
   min-width: 300px;
   min-height: 10%;
-  color: #172b4d;
+  color: #e9e9f4;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f8f9fa; /* A touch of elegance, like a fine backdrop at a soirée. */
+  background: linear-gradient(135deg, #0a2342 0%, #193b6a 100%);
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card {
-  padding: 1rem;
-  border-radius: 0.25rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  background: rgba(20, 34, 56, 0.98);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(44, 62, 80, 0.3);
+  backdrop-filter: blur(4px);
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: #6ea8fe;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 label {
   display: block;
   margin-bottom: 0.5rem;
+  color: #a3bffa;
+  font-weight: 500;
 }
 
 textarea {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem;
   box-sizing: border-box;
   margin-bottom: 1rem;
   resize: none;
+  background: #14223a;
+  color: #e9e9f4;
+  border: 1px solid #223a5e;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border: 1.5px solid #6ea8fe;
+  background: #1a2d4a;
 }
 
 #copy-button,
 #download-button,
 #export-button {
   flex: 1;
-  padding: 0.75rem;
-  background-color: #007bff;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
   color: #fff;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   cursor: pointer;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.15);
+  transition: background 0.2s, transform 0.1s;
+}
+
+#copy-button:last-child,
+#download-button:last-child,
+#export-button:last-child {
+  margin-right: 0;
 }
 
 #copy-button:hover,
 #download-button:hover,
 #export-button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+a {
+  color: #6ea8fe;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #a3bffa;
+  text-decoration: underline;
 }
